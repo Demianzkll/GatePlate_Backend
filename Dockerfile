@@ -36,4 +36,5 @@ RUN python manage.py collectstatic --noinput 2>/dev/null || true
 EXPOSE 8000
 
 # ── Run with dynamic $PORT from Railway ───────────────────
-CMD gunicorn --bind 0.0.0.0:$PORT core.wsgi
+CMD gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+
